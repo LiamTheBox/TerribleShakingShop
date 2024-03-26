@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terrible Shaking Shop</title>
+    <style>
+        @keyframes shake {
+            0% { transform: translate(0); }
+            10%, 90% { transform: translate(-10px, 10px); }
+            20%, 80% { transform: translate(10px, -10px); }
+            30%, 50%, 70% { transform: translate(-10px, 10px); }
+            40%, 60% { transform: translate(10px, -10px); }
+            100% { transform: translate(0); }
+        }
+
+        
+        
+        body {
+            background-image: url('wind.png'); /* Path to your tiled background image */
+            background-repeat: repeat;
+            background-size: 100px;
+            font-family: Comic Sans MS, cursive, sans-serif;
+            animation: shake 0.5s infinite;
+        }
+        
+        h1 {
+            color: green;
+            text-align: center;
+            text-shadow: 3px 3px 3px yellow;
+        }
+
+        .navbar {
+            background-color: black;
+            color: white;
+            padding: 10px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: yellow;
+            border: 5px solid blue;
+            border-radius: 50px;
+            box-shadow: 10px 10px 5px grey;
+        }
+
+        .product {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border: 3px solid red;
+            border-radius: 20px;
+            text-align: center;
+        }
+        @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+        .product img {
+    max-width: 100%;
+    border: 2px solid black;
+    border-radius: 10px;
+    animation: rotate 1s linear infinite; /* Add rotation animation */
+}
+
+        .product h2 {
+            color: blue;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .product p {
+            color: red;
+            font-size: 18px;
+        }
+
+        .add-to-cart {
+            background-color: brown;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .add-to-cart:hover {
+            background-color: darkred;
+        }
+
+        .added-to-cart {
+            background-color: green;
+        }
+
+        .cart-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 3px solid black;
+            border-radius: 10px;
+            padding: 20px;
+            z-index: 999;
+            display: none;
+        }
+
+        .checkout-button {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            background-color: black;
+            color: white;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <audio controls loop autoplay>
+        <source src="1966 Honda S90.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="navbar">
+        <a href="index.html">Home</a>
+    </div>
+
+    <header>
+        <h1>Welcome to the second hand and not stolen catalytic converter shop</h1>
+    </header>
+
+    <div class="container">
+        <div class="product">
+            <img src="dual cat.jpeg" alt="Product Image">
+            <h2>Dual Catalytic Converter</h2>
+            <p>£75</p>
+            <button class="add-to-cart" onclick="playSound(this)">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="singlecat.jpg" alt="Product Image">
+            <h2>Catalytic Converter</h2>
+            <p>£50</p>
+            <button class="add-to-cart" onclick="playSound(this)">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="hollow cat.jpeg" alt="Product Image">
+            <h2>Hollow Catalytic Converter</h2>
+            <p>£65</p>
+            <button class="add-to-cart" onclick="playSound(this)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="cart-popup" id="cartPopup">
+        <h2>Item Added to Cart!</h2>
+        <button class="checkout-button" onclick="checkout()">Checkout</button>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Terrible Shaking Shop. All rights reserved</p>
+    </footer>
+
+    <audio id="addToCartSound">
+        <source src="ahh.mp3" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        function playSound(button) {
+            const addToCartSound = document.getElementById('addToCartSound');
+            addToCartSound.play();
+            const productImage = button.parentElement.querySelector('img');
+            productImage.style.animation = 'rotate 1s linear infinite'; // Set rotation animation directly
+        }
+    
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const cartPopup = document.getElementById('cartPopup');
+    
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                button.classList.add('added-to-cart');
+                button.innerText = 'Added!';
+                cartPopup.style.display = 'block';
+                setTimeout(() => {
+                    cartPopup.style.display = 'none';
+                }, 2000);
+            });
+        });
+    
+        function checkout() {
+            alert('You cant buy this. we dont like people like you. loser.');
+        }
+    </script>
+</body>
+</html>
